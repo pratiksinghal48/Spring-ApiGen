@@ -2,24 +2,31 @@ package gen.api.mvc;
 
 import java.io.File;
 
-import com.helger.jcodemodel.JCodeModel;
-import com.helger.jcodemodel.JDefinedClass;
-import com.helger.jcodemodel.JFieldVar;
-import com.helger.jcodemodel.JMod;
-import com.helger.jcodemodel.JPackage;
-
-import gen.api.mvc.elements.BaseElements;
-import gen.api.mvc.elements.ClassElements;
+import gen.api.mvc.builders.CodeWriter;
+import gen.api.mvc.builders.elements.ClassElement;
+import gen.api.mvc.builders.elements.Field;
+import gen.api.mvc.builders.elements.JavaFile;
+import gen.api.mvc.builders.elements.Modifiers;
+import gen.api.mvc.builders.elements.Pkg;
 
 public class App 
 {
     public static void main( String[] args ) throws Exception {
-        JCodeModel model = new JCodeModel();
-        JPackage pkg = BaseElements.getPackage(model, "samplePackage");
-        JDefinedClass cls = BaseElements.getClass(pkg, "SampleClass");
-        JFieldVar fld = BaseElements.getField(cls, "field1", int.class, JMod.PRIVATE);
-        ClassElements.getGetter(cls, fld);
-        ClassElements.getSetter(cls, fld);
-        model.build(new File("/"), System.out);
+        Pkg pkg = new Pkg();
+        pkg.setName("crud.api.exploritage");
+        Field field = Field.builder()
+        			.addIdentifier("id")
+        			.addClassType(int.class)
+        			.addModifier(Modifiers.PRIVATE)
+        			.setGetter(true)
+        			.setSetter(true)
+        			.build();
+        ClassElement classElement = ClassElement.builder()
+        			.addPackage(pkg)
+        			.addIdentifier("DestinationEntity")
+        			.addField(field)
+        			.addField("name", String.class, Modifiers.PRIVATE, true, true)
+        			.build();
+        JavaFile.builder(new CodeWriter()).addClass(classElement).build().write(new File("/Users/pratik/codebase/workspace/"));
     }
 }

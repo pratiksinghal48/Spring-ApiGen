@@ -8,7 +8,7 @@ import com.helger.jcodemodel.JMod;
 
 public class ClassElements {
 	
-	public static JMethod getGetter(JDefinedClass parentClass, JFieldVar variable) throws ClassNotFoundException {
+	public static JMethod getGetter(JDefinedClass parentClass, JFieldVar variable) {
 		String getterName = "get" + variable.name();
 		JMethod getter = BaseElements.getMethod(parentClass, getterName, variable.type());
 		getter.body()._return(variable);
