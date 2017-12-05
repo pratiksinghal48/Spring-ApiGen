@@ -6,17 +6,8 @@ import gen.api.mvc.builders.impl.ClassBuilder;
 
 public class ClassElement extends BaseElement {
 	
-	private Pkg pkg;
 	private List<Field> fields;
 	private List<Method> methods;
-
-	public Pkg getPkg() {
-		return pkg;
-	}
-
-	public void setPkg(Pkg pkg) {
-		this.pkg = pkg;
-	}
 
 	public List<Field> getFields() {
 		return fields;

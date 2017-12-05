@@ -9,7 +9,6 @@ import gen.api.mvc.builders.IBuilder;
 import gen.api.mvc.builders.elements.ClassElement;
 import gen.api.mvc.builders.elements.Field;
 import gen.api.mvc.builders.elements.Modifiers;
-import gen.api.mvc.builders.elements.Pkg;
 import gen.api.mvc.exceptions.BuilderException;
 import gen.api.mvc.exceptions.ExceptionMessages;
 
@@ -33,11 +32,6 @@ public class ClassBuilder implements IBuilder<ClassElement> {
 		classElement.setModifiers(new ArrayList<>());
 		classElement.setFields(new ArrayList<>());
 		classElement.setMethods(new ArrayList<>());
-	}
-	
-	public ClassBuilder addPackage(Pkg pkg) {
-		classElement.setPkg(pkg);
-		return this;
 	}
 	
 	public ClassBuilder addIdentifier(String identifier) {
@@ -90,9 +84,6 @@ public class ClassBuilder implements IBuilder<ClassElement> {
 	}
 
 	private void validate() throws BuilderException {
-		if(classElement.getPkg() == null) {
-			throw new BuilderException(classElement, ExceptionMessages.PACKAGE_NOT_PRESENT);
-		}
 		if(StringUtils.isEmpty(classElement.getIdentifier())) {
 			throw new BuilderException(classElement, ExceptionMessages.IDENTIFIER_NOT_PRESENT);
 		}

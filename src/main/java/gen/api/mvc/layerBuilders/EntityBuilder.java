@@ -6,20 +6,14 @@ import gen.api.mvc.builders.IBuilder;
 import gen.api.mvc.builders.elements.ClassElement;
 import gen.api.mvc.builders.elements.Field;
 import gen.api.mvc.builders.elements.Modifiers;
-import gen.api.mvc.builders.elements.Pkg;
 import gen.api.mvc.builders.impl.ClassBuilder;
 import gen.api.mvc.exceptions.BuilderException;
 
 public class EntityBuilder implements IBuilder<ClassElement> {
 	
-	private ClassElement entity;
-	
 	public static ClassElement getEntity(List<String> fieldsToBe, String name) throws BuilderException {
 		String entityIdentifier = name + "Entity";
 		ClassBuilder builder = ClassElement.builder();
-		Pkg pkg = new Pkg();
-        pkg.setName("crud.api.exploritage.entites");
-        builder.addPackage(pkg);
 		for(String fieldToBe : fieldsToBe) {
 			Field field = Field.builder()
 					.addIdentifier(fieldToBe)

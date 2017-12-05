@@ -9,6 +9,7 @@ import com.helger.jcodemodel.JPackage;
 
 import gen.api.mvc.builders.elements.ClassElement;
 import gen.api.mvc.builders.elements.JavaFile;
+import gen.api.mvc.builders.elements.PackageElement;
 import gen.api.mvc.codeWriter.ICodeWriter;
 
 public class CodeModelWriter implements ICodeWriter {
@@ -23,13 +24,15 @@ public class CodeModelWriter implements ICodeWriter {
 	@Override
 	public void makeCode() {
 		model = new JCodeModel();
-		for(ClassElement clsElement : javaFile.getClassElement()) {
-			JPackage pkg = BaseElements.getPackage(model, clsElement.getPkg().getName());
-			try {
-				ElementsWriter.writeClass(pkg, clsElement);
-			} catch (JClassAlreadyExistsException e) {
-				// TODO throw exception here
-				e.printStackTrace();
+		for(PackageElement packageElement : javaFile.getPackageElement()) {
+			JPackage pkg = BaseElements.getPackage(model, packageElement.getIdentifier());
+			for(ClassElement clsElement : packageElement.getClassElements()) {
+				try {
+					ElementsWriter.writeClass(pkg, clsElement);
+				} catch (JClassAlreadyExistsException e) {
+					// TODO throw exception here
+					e.printStackTrace();
+				}
 			}
 		}
 	}
