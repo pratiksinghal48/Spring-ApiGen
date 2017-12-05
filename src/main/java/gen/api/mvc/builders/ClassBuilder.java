@@ -1,8 +1,8 @@
 package gen.api.mvc.builders;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import gen.api.mvc.builders.elements.ClassElement;
@@ -29,6 +29,7 @@ public class ClassBuilder implements IBuilder<ClassElement> {
 		if(this.classElement == null) {
 			this.classElement = new ClassElement();
 		}
+		classElement.setModifiers(new ArrayList<>());
 		classElement.setFields(new ArrayList<>());
 		classElement.setMethods(new ArrayList<>());
 	}
@@ -45,11 +46,6 @@ public class ClassBuilder implements IBuilder<ClassElement> {
 
 	public ClassBuilder addField(Field field) {
 		classElement.getFields().add(field);
-		return this;
-	}
-
-	public ClassBuilder addField(List<Field> fields) {
-		fields.addAll(fields);
 		return this;
 	}
 
@@ -86,15 +82,18 @@ public class ClassBuilder implements IBuilder<ClassElement> {
 	@Override
 	public ClassElement build() throws BuilderException{
 		validate();
+		if(CollectionUtils.isEmpty(classElement.getModifiers())) {
+			classElement.getModifiers().add(Modifiers.PUBLIC);
+		}
 		return classElement;
 	}
 
 	private void validate() throws BuilderException {
 		if(classElement.getPkg() == null) {
-			throw new BuilderException(ExceptionMessages.PACKAGE_NOT_PRESENT);
+			throw new BuilderException(classElement, ExceptionMessages.PACKAGE_NOT_PRESENT);
 		}
 		if(StringUtils.isEmpty(classElement.getIdentifier())) {
-			throw new BuilderException(ExceptionMessages.IDENTIFIER_NOT_PRESENT);
+			throw new BuilderException(classElement, ExceptionMessages.IDENTIFIER_NOT_PRESENT);
 		}
 	}
 

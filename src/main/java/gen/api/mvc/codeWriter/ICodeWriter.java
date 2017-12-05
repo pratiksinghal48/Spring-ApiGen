@@ -1,4 +1,4 @@
-package gen.api.mvc.builders;
+package gen.api.mvc.codeWriter;
 
 import java.io.File;
 import java.io.IOException;

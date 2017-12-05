@@ -1,4 +1,4 @@
-package gen.api.mvc.elements;
+package gen.api.mvc.codeWriter;
 
 import com.helger.jcodemodel.JDefinedClass;
 import com.helger.jcodemodel.JExpr;
@@ -10,7 +10,7 @@ public class ClassElements {
 	
 	public static JMethod getGetter(JDefinedClass parentClass, JFieldVar variable) {
 		String getterName = "get" + variable.name();
-		JMethod getter = BaseElements.getMethod(parentClass, getterName, variable.type());
+		JMethod getter = BaseElements.getMethod(parentClass, getterName, variable.type(), JMod.PUBLIC);
 		getter.body()._return(variable);
 		return getter;
 	}

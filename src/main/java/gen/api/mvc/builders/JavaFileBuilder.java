@@ -21,7 +21,7 @@ public class JavaFileBuilder implements IBuilder<JavaFile>  {
 	}
 	
 	public JavaFileBuilder addClass(ClassElement classElement) {
-		javaFile.setClassElement(classElement);
+		javaFile.getClassElement().add(classElement);
 		return this;
 	}
 

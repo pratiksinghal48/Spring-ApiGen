@@ -1,25 +1,15 @@
 package gen.api.mvc.exceptions;
 
+import gen.api.mvc.builders.elements.BaseElement;
+
 @SuppressWarnings("serial")
 public class BuilderException extends Exception {
 
-	public BuilderException() {
-		super();
+	public BuilderException( BaseElement element, String message) {
+		super(element.getIdentifier() + message);
 	}
-
-	public BuilderException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
-
-	public BuilderException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
+	
 	public BuilderException(String message) {
 		super(message);
-	}
-
-	public BuilderException(Throwable cause) {
-		super(cause);
 	}
 }

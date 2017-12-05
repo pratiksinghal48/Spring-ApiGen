@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import org.springframework.util.StringUtils;
 
+import gen.api.mvc.builders.elements.BaseElement;
+import gen.api.mvc.builders.elements.ClassType;
 import gen.api.mvc.builders.elements.Field;
 import gen.api.mvc.builders.elements.Modifiers;
 import gen.api.mvc.exceptions.BuilderException;
@@ -33,10 +35,18 @@ public class FieldBuilder implements IBuilder<Field> {
 		this.fieldInstance.setIdentifier(identifier);
 		return this;
 	}
-
-	public FieldBuilder addClassType(Class<?> classType) {
-		this.fieldInstance.setElementClassType(classType);
+	
+	public FieldBuilder addClassType(ClassType classType) {
+		this.fieldInstance.setClassType(classType);
 		return this;
+	}
+
+	public FieldBuilder addClassType(BaseElement element) {
+		return addClassType(new ClassType(element));
+	}
+	
+	public FieldBuilder addClassType(Class<?> classType) {
+		return addClassType(new ClassType(classType));
 	}
 
 	public FieldBuilder addModifier(Modifiers modifier) {
@@ -62,10 +72,10 @@ public class FieldBuilder implements IBuilder<Field> {
 
 	private void validate() throws BuilderException {
 		if(StringUtils.isEmpty(fieldInstance.getIdentifier())) {
-			throw new BuilderException(ExceptionMessages.IDENTIFIER_NOT_PRESENT);
+			throw new BuilderException(fieldInstance, ExceptionMessages.IDENTIFIER_NOT_PRESENT);
 		}
-		if(fieldInstance.getElementClassType() == null) {
-			throw new BuilderException(ExceptionMessages.CLASS_TYPE_NOT_PRESENT);
+		if(fieldInstance.getClassType() == null) {
+			throw new BuilderException(fieldInstance, ExceptionMessages.CLASS_TYPE_NOT_PRESENT);
 		}
 	}
 
