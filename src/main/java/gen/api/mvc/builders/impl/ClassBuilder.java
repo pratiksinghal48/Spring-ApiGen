@@ -1,10 +1,11 @@
-package gen.api.mvc.builders;
+package gen.api.mvc.builders.impl;
 
 import java.util.ArrayList;
 
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import gen.api.mvc.builders.IBuilder;
 import gen.api.mvc.builders.elements.ClassElement;
 import gen.api.mvc.builders.elements.Field;
 import gen.api.mvc.builders.elements.Modifiers;

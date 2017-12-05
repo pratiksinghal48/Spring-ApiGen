@@ -1,13 +1,13 @@
-package gen.api.mvc.layerGens;
+package gen.api.mvc.layerBuilders;
 
 import java.util.List;
 
-import gen.api.mvc.builders.ClassBuilder;
 import gen.api.mvc.builders.IBuilder;
 import gen.api.mvc.builders.elements.ClassElement;
 import gen.api.mvc.builders.elements.Field;
 import gen.api.mvc.builders.elements.Modifiers;
 import gen.api.mvc.builders.elements.Pkg;
+import gen.api.mvc.builders.impl.ClassBuilder;
 import gen.api.mvc.exceptions.BuilderException;
 
 public class EntityBuilder implements IBuilder<ClassElement> {

@@ -1,5 +1,6 @@
-package gen.api.mvc.builders;
+package gen.api.mvc.builders.impl;
 
+import gen.api.mvc.builders.IBuilder;
 import gen.api.mvc.builders.elements.ClassElement;
 import gen.api.mvc.builders.elements.JavaFile;
 import gen.api.mvc.exceptions.BuilderException;
@@ -16,7 +17,7 @@ public class JavaFileBuilder implements IBuilder<JavaFile>  {
 	
 	private void init() {
 		if(this.javaFile == null) {
-			this.javaFile = new JavaFile(new CodeWriter());
+			this.javaFile = new JavaFile();
 		}
 	}
 	

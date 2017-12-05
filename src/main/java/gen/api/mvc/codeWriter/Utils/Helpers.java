@@ -1,4 +1,4 @@
-package gen.api.mvc.codeWriter;
+package gen.api.mvc.codeWriter.Utils;
 
 import java.util.List;
 

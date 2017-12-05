@@ -2,7 +2,7 @@ package gen.api.mvc.builders.elements;
 
 import java.util.List;
 
-import gen.api.mvc.builders.ClassBuilder;
+import gen.api.mvc.builders.impl.ClassBuilder;
 
 public class ClassElement extends BaseElement {
 	

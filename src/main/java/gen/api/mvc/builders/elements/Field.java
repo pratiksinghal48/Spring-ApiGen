@@ -1,6 +1,6 @@
 package gen.api.mvc.builders.elements;
 
-import gen.api.mvc.builders.FieldBuilder;
+import gen.api.mvc.builders.impl.FieldBuilder;
 
 public class Field extends BaseElement {
 	
