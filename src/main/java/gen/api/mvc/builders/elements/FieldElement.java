@@ -2,18 +2,18 @@ package gen.api.mvc.builders.elements;
 
 import gen.api.mvc.builders.impl.FieldBuilder;
 
-public class Field extends BaseElement {
+public class FieldElement extends BaseElement {
 	
 	private boolean haveGetter;
 	private boolean haveSetter;
 	
-	public Field(boolean haveGetter, boolean haveSetter) {
+	public FieldElement(boolean haveGetter, boolean haveSetter) {
 		super();
 		this.haveGetter = haveGetter;
 		this.haveSetter = haveSetter;
 	}
 	
-	public Field() {
+	public FieldElement() {
 		
 	}
 	
@@ -30,6 +30,6 @@ public class Field extends BaseElement {
 		this.haveSetter = haveSetter;
 	}
 	public static FieldBuilder builder() {
-		return new FieldBuilder(new Field());
+		return new FieldBuilder(new FieldElement());
 	}
 }

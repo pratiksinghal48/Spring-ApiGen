@@ -11,7 +11,7 @@ import com.helger.jcodemodel.JPackage;
 
 import gen.api.mvc.builders.elements.ClassElement;
 import gen.api.mvc.builders.elements.ClassType;
-import gen.api.mvc.builders.elements.Field;
+import gen.api.mvc.builders.elements.FieldElement;
 import gen.api.mvc.codeWriter.Utils.Helpers;
 
 public class BaseElements {
@@ -65,7 +65,7 @@ public class BaseElements {
 		return cls;
 	}
 
-	public static JFieldVar getField(JDefinedClass parentClass, Field field) {
+	public static JFieldVar getField(JDefinedClass parentClass, FieldElement field) {
 		ClassType classType = field.getClassType();
 		int modifier = Helpers.getModifier(field.getModifiers());
 		String identifier = field.getIdentifier();

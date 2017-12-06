@@ -6,9 +6,10 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import gen.api.mvc.builders.IBuilder;
+import gen.api.mvc.builders.consts.Modifiers;
+import gen.api.mvc.builders.elements.AnnotationElement;
 import gen.api.mvc.builders.elements.ClassElement;
-import gen.api.mvc.builders.elements.Field;
-import gen.api.mvc.builders.elements.Modifiers;
+import gen.api.mvc.builders.elements.FieldElement;
 import gen.api.mvc.exceptions.BuilderException;
 import gen.api.mvc.exceptions.ExceptionMessages;
 
@@ -32,6 +33,7 @@ public class ClassBuilder implements IBuilder<ClassElement> {
 		classElement.setModifiers(new ArrayList<>());
 		classElement.setFields(new ArrayList<>());
 		classElement.setMethods(new ArrayList<>());
+		classElement.setAnnotations(new ArrayList<>());
 	}
 	
 	public ClassBuilder addIdentifier(String identifier) {
@@ -39,13 +41,13 @@ public class ClassBuilder implements IBuilder<ClassElement> {
 		return this;
 	}
 
-	public ClassBuilder addField(Field field) {
+	public ClassBuilder addField(FieldElement field) {
 		classElement.getFields().add(field);
 		return this;
 	}
 
 	public ClassBuilder addField(String identifier, Class<?> fieldType, Modifiers modifiers) throws BuilderException {
-		Field field = Field.builder()
+		FieldElement field = FieldElement.builder()
 				.addIdentifier(identifier)
 				.addClassType(fieldType)
 				.addModifier(modifiers)
@@ -55,7 +57,7 @@ public class ClassBuilder implements IBuilder<ClassElement> {
 
 	public ClassBuilder addField(String identifier, Class<?> fieldType, Modifiers modifiers, boolean haveGetter,
 			boolean haveSetter) throws BuilderException {
-		Field field = Field.builder()
+		FieldElement field = FieldElement.builder()
 				.addIdentifier(identifier)
 				.addClassType(fieldType)
 				.addModifier(modifiers)
@@ -64,16 +66,17 @@ public class ClassBuilder implements IBuilder<ClassElement> {
 				.build();
 		return addField(field);
 	}
-
-//	public ClassBuilder addMethod(Method method) {
-//		methods.add(method);
-//		return this;
-//	}
-//
-//	public ClassBuilder addMethod(String identifier, Class<?> fieldType, int modifiers) {
-//		return addMethod(new Method(identifier, fieldType, modifiers));
-//	}
 	
+	public ClassBuilder addAnnotation(AnnotationElement tableAnnotation) {
+		this.classElement.getAnnotations().add(tableAnnotation);
+		return this;
+	}
+	
+	public ClassBuilder addAnnotation(Class<?> classType) throws BuilderException {
+		AnnotationElement annotationElement = AnnotationElement.builder().addClassType(classType).build();
+		return addAnnotation(annotationElement);
+	}
+
 	@Override
 	public ClassElement build() throws BuilderException{
 		validate();

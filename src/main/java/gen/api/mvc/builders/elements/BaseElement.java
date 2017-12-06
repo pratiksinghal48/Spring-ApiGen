@@ -2,6 +2,8 @@ package gen.api.mvc.builders.elements;
 
 import java.util.List;
 
+import gen.api.mvc.builders.consts.Modifiers;
+
 public abstract class BaseElement {
 
 	protected String identifier;

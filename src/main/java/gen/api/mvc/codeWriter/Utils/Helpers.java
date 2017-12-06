@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.helger.jcodemodel.JMod;
 
-import gen.api.mvc.builders.elements.Modifiers;
+import gen.api.mvc.builders.consts.Modifiers;
 
 public class Helpers {
 	

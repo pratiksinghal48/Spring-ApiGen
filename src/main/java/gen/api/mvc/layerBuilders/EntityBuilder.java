@@ -3,15 +3,17 @@ package gen.api.mvc.layerBuilders;
 import java.util.Date;
 
 import gen.api.mvc.builders.IBuilder;
+import gen.api.mvc.builders.consts.Modifiers;
+import gen.api.mvc.builders.elements.AnnotationElement;
 import gen.api.mvc.builders.elements.ClassElement;
-import gen.api.mvc.builders.elements.Field;
-import gen.api.mvc.builders.elements.Modifiers;
+import gen.api.mvc.builders.elements.FieldElement;
 import gen.api.mvc.builders.impl.ClassBuilder;
 import gen.api.mvc.exceptions.BuilderException;
 
 public class EntityBuilder implements IBuilder<ClassElement> {
 
 	private ClassBuilder builder;
+	private String identifier;
 	private String ENTITY_IDENTIFIER = "Entity";
 	private Boolean ifIdField;
 	private Boolean ifCreatedField;
@@ -28,11 +30,12 @@ public class EntityBuilder implements IBuilder<ClassElement> {
 	}
 
 	public EntityBuilder addIdentifier(String identifier) {
-		builder.addIdentifier(identifier + ENTITY_IDENTIFIER);
+		this.identifier = identifier;
+		builder.addIdentifier(this.identifier + ENTITY_IDENTIFIER);
 		return this;
 	}
 
-	public EntityBuilder addField(Field field) {
+	public EntityBuilder addField(FieldElement field) {
 		builder.addField(field);
 		return this;
 	}
@@ -66,6 +69,12 @@ public class EntityBuilder implements IBuilder<ClassElement> {
 		if(ifUpdateField == null || ifUpdateField) {
 			builder.addField(getField(Date.class, "updated"));
 		}
+		builder.addAnnotation(javax.persistence.Entity.class);
+		AnnotationElement tableAnnotation = AnnotationElement.builder()
+				.addClassType(javax.persistence.Table.class)
+				.addClassType("name", this.identifier)
+				.build();
+		builder.addAnnotation(tableAnnotation);
 		return builder.build();
 	}
 
@@ -73,9 +82,9 @@ public class EntityBuilder implements IBuilder<ClassElement> {
 
 	}
 
-	private Field getField(Class<?> classType, String identifier) {
+	private FieldElement getField(Class<?> classType, String identifier) {
 		try {
-			return Field.builder()
+			return FieldElement.builder()
 					.addIdentifier(identifier)
 					.addClassType(classType)
 					.addModifier(Modifiers.PRIVATE)

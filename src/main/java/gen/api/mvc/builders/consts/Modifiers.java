@@ -1,4 +1,4 @@
-package gen.api.mvc.builders.elements;
+package gen.api.mvc.builders.consts;
 
 public enum Modifiers {
 		NONE,
@@ -13,6 +13,5 @@ public enum Modifiers {
 		TRANSIENT,
 		VOLATILE,
 		DEFAULT,
-		STRICTFP,
-		;
+		STRICTFP;
 }

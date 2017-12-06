@@ -5,29 +5,25 @@ import java.util.ArrayList;
 import org.springframework.util.StringUtils;
 
 import gen.api.mvc.builders.IBuilder;
+import gen.api.mvc.builders.consts.Modifiers;
 import gen.api.mvc.builders.elements.BaseElement;
 import gen.api.mvc.builders.elements.ClassType;
-import gen.api.mvc.builders.elements.Field;
-import gen.api.mvc.builders.elements.Modifiers;
+import gen.api.mvc.builders.elements.FieldElement;
 import gen.api.mvc.exceptions.BuilderException;
 import gen.api.mvc.exceptions.ExceptionMessages;
 
-public class FieldBuilder implements IBuilder<Field> {
+public class FieldBuilder implements IBuilder<FieldElement> {
 
-	private Field fieldInstance;
+	private FieldElement fieldInstance;
 
-	public FieldBuilder() {
-		init();
-	}
-
-	public FieldBuilder(Field field) {
+	public FieldBuilder(FieldElement field) {
 		this.fieldInstance = field;
 		init();
 	}
 
 	private void init() {
 		if(this.fieldInstance == null) {
-			this.fieldInstance = new Field();
+			this.fieldInstance = new FieldElement();
 		}
 		this.fieldInstance.setModifiers(new ArrayList<>());
 	}
@@ -66,7 +62,7 @@ public class FieldBuilder implements IBuilder<Field> {
 	}
 
 	@Override
-	public Field build() throws BuilderException {
+	public FieldElement build() throws BuilderException {
 		validate();
 		return fieldInstance;
 	}
