@@ -1,5 +1,6 @@
 package gen.api.mvc.builders.impl;
 
+import java.lang.annotation.Annotation;
 import java.util.HashMap;
 
 import org.springframework.util.CollectionUtils;
@@ -17,7 +18,7 @@ public class AnnotationBuilder implements IBuilder<AnnotationElement> {
 		init();
 	}
 	
-	public AnnotationBuilder addClassType(Class<?> classType) {
+	public AnnotationBuilder addClassType(Class<? extends Annotation> classType) {
 		this.annotationElement.setClassType(classType);
 		return this;
 	}

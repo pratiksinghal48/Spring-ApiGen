@@ -1,5 +1,6 @@
 package gen.api.mvc.builders.impl;
 
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 
 import org.springframework.util.CollectionUtils;
@@ -72,7 +73,7 @@ public class ClassBuilder implements IBuilder<ClassElement> {
 		return this;
 	}
 	
-	public ClassBuilder addAnnotation(Class<?> classType) throws BuilderException {
+	public ClassBuilder addAnnotation(Class<? extends Annotation> classType) throws BuilderException {
 		AnnotationElement annotationElement = AnnotationElement.builder().addClassType(classType).build();
 		return addAnnotation(annotationElement);
 	}
